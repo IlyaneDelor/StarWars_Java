@@ -1,9 +1,9 @@
 package starWars;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Film {
-
     // Variables
     private int id;
     private String titre;
@@ -12,9 +12,6 @@ public class Film {
     private double cout;
     private double recette;
     private ArrayList<Acteur> acteurs;
-
-    public Film() {
-    }
 
     /**
      * Constructor
@@ -30,14 +27,42 @@ public class Film {
      * @param recette
      */
 
-    public Film(int id, String titre, String annee_sortie, int nb_episode, double cout, double recette) {
-        this.id = id;
+    public Film(String titre, String annee_sortie, int nb_episode, double cout, double recette) {
         this.titre = titre;
         this.annee_sortie = annee_sortie;
         this.nb_episode = nb_episode;
         this.cout = cout;
         this.recette = recette;
         this.acteurs = new ArrayList();
+    }
+
+    public Film new_film() {
+      
+            System.out.println("[Nouveau film]");
+            Scanner scan = new Scanner(System.in);
+            System.out.println("-  titre du film : ");
+            String titreFilm = scan.nextLine();
+            this.titre = titreFilm;
+            System.out.println("-  année du film : ");
+            String anneeDeSortieFilm = scan.next();
+            this.annee_sortie = anneeDeSortieFilm;
+            System.out.println("-  numéro du film : ");
+            int numeroEpisodeFilm = scan.nextInt();
+            this.nb_episode = numeroEpisodeFilm;
+            System.out.println("-  coût du film : ");
+            int coutFilm = scan.nextInt();
+            this.cout = coutFilm;
+            System.out.println("- recette du film : ");
+            int recetteFilm = scan.nextInt();
+            this.recette = recetteFilm;
+            this.acteurs = new ArrayList();
+            System.out.println("[Nouveau film enregistré]");
+            Film new_film = new Film(titreFilm,anneeDeSortieFilm,numeroEpisodeFilm,coutFilm,recetteFilm);
+            return new_film;
+            
+            
+        
+ 
     }
 
     // Get

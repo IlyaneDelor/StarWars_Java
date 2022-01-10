@@ -1,10 +1,10 @@
 package starWars;
 
-public class Acteur {
+public class Personnage {
     String nom;
     String prenom;
 
-    public Acteur(String nom, String prenom) {
+    public Personnage(String nom, String prenom) {
         this.nom = nom;
         this.prenom = prenom;
     }
@@ -26,7 +26,6 @@ public class Acteur {
     }
 
     public String toString() {
-        return "Nom : " + this.nom + "\n Prénom: " + this.prenom;
+        return "nom: " + this.nom + " prenom: " + this.prenom;
     }
-
 }
