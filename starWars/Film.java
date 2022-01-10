@@ -1,9 +1,14 @@
 package starWars;
 
+import java.text.ParseException;
+import java.util.Locale;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Collection;
+import java.text.DateFormat;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class Film {
     // Variables
@@ -40,26 +45,30 @@ public class Film {
 
     public Film new_film() {
 
-        System.out.println("[Nouveau film]");
+        System.out.println("Creation Nouveau film :");
         Scanner scan = new Scanner(System.in);
-        System.out.println("-  titre du film : ");
+        System.out.println("- Titre du film : ");
         String titreFilm = scan.nextLine();
+
         this.titre = titreFilm;
-        System.out.println("-  année du film : ");
-        String anneeDeSortieFilm = scan.next();
-        this.annee_sortie = anneeDeSortieFilm;
-        System.out.println("-  numéro du film : ");
-        int numeroEpisodeFilm = scan.nextInt();
-        this.nb_episode = numeroEpisodeFilm;
-        System.out.println("-  coût du film : ");
+        System.out.println("- Annee du film : ");
+        String anneeSortiFilm = scan.next();
+        this.annee_sortie = anneeSortiFilm;
+        System.out.println("- Numero du film : ");
+        int numeroFilm = scan.nextInt();
+
+        this.nb_episode = numeroFilm;
+        System.out.println("- Cout du film : ");
         int coutFilm = scan.nextInt();
+
         this.cout = coutFilm;
-        System.out.println("- recette du film : ");
+        System.out.println("- Recette du film : ");
         int recetteFilm = scan.nextInt();
+
         this.recette = recetteFilm;
-        this.acteurs = new ArrayList();
-        System.out.println("[Nouveau film enregistré]");
-        Film new_film = new Film(titreFilm, anneeDeSortieFilm, numeroEpisodeFilm, coutFilm, recetteFilm);
+
+        System.out.println(" Nouveau film enregistré dans l'Array ! ");
+        Film new_film = new Film(titreFilm, anneeSortiFilm, numeroFilm, coutFilm, recetteFilm);
         return new_film;
 
     }
@@ -150,6 +159,34 @@ public class Film {
             result.add(diff);
         }
         return result;
+    }
+
+    public boolean isBefore(String anneeInserted) throws ParseException {
+        DateFormat format = new SimpleDateFormat("YYYY", Locale.FRANCE);
+        Date anneeDeSortieToDate = format.parse(this.annee_sortie);
+
+        Date anneeInsertedToDate = format.parse(anneeInserted);
+        return anneeDeSortieToDate.compareTo(anneeInsertedToDate) < 0;
+    }
+
+    public ArrayList tri() {
+        ArrayList<Acteur> Tries = new ArrayList();
+        if (this.acteurs != null && !this.acteurs.isEmpty()) {
+
+            Collections.sort(this.acteurs, new Comparator<Acteur>() {
+
+                public int compare(Acteur acteur1, Acteur acteur2) {
+                    return acteur1.getNom().compareTo(acteur2.getNom());
+                }
+            });
+
+            Tries.addAll(this.acteurs);
+
+        } else {
+            Tries = null;
+
+        }
+        return Tries;
     }
 
     // Fonctions ToString pour afficher les valeurs des attributs
