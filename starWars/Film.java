@@ -2,6 +2,8 @@ package starWars;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Collection;
+import java.util.Collections;
 
 public class Film {
     // Variables
@@ -37,32 +39,29 @@ public class Film {
     }
 
     public Film new_film() {
-      
-            System.out.println("[Nouveau film]");
-            Scanner scan = new Scanner(System.in);
-            System.out.println("-  titre du film : ");
-            String titreFilm = scan.nextLine();
-            this.titre = titreFilm;
-            System.out.println("-  année du film : ");
-            String anneeDeSortieFilm = scan.next();
-            this.annee_sortie = anneeDeSortieFilm;
-            System.out.println("-  numéro du film : ");
-            int numeroEpisodeFilm = scan.nextInt();
-            this.nb_episode = numeroEpisodeFilm;
-            System.out.println("-  coût du film : ");
-            int coutFilm = scan.nextInt();
-            this.cout = coutFilm;
-            System.out.println("- recette du film : ");
-            int recetteFilm = scan.nextInt();
-            this.recette = recetteFilm;
-            this.acteurs = new ArrayList();
-            System.out.println("[Nouveau film enregistré]");
-            Film new_film = new Film(titreFilm,anneeDeSortieFilm,numeroEpisodeFilm,coutFilm,recetteFilm);
-            return new_film;
-            
-            
-        
- 
+
+        System.out.println("[Nouveau film]");
+        Scanner scan = new Scanner(System.in);
+        System.out.println("-  titre du film : ");
+        String titreFilm = scan.nextLine();
+        this.titre = titreFilm;
+        System.out.println("-  année du film : ");
+        String anneeDeSortieFilm = scan.next();
+        this.annee_sortie = anneeDeSortieFilm;
+        System.out.println("-  numéro du film : ");
+        int numeroEpisodeFilm = scan.nextInt();
+        this.nb_episode = numeroEpisodeFilm;
+        System.out.println("-  coût du film : ");
+        int coutFilm = scan.nextInt();
+        this.cout = coutFilm;
+        System.out.println("- recette du film : ");
+        int recetteFilm = scan.nextInt();
+        this.recette = recetteFilm;
+        this.acteurs = new ArrayList();
+        System.out.println("[Nouveau film enregistré]");
+        Film new_film = new Film(titreFilm, anneeDeSortieFilm, numeroEpisodeFilm, coutFilm, recetteFilm);
+        return new_film;
+
     }
 
     // Get
@@ -124,12 +123,44 @@ public class Film {
         this.acteurs = acteurs;
     }
 
+    public int getNombreActeurs() {
+        return !this.acteurs.isEmpty() && this.acteurs.size() > 0 ? this.acteurs.size() : 0;
+    }
+
+    public int getNombrePersonnages() {
+        int i = 0;
+        for (Acteur acteur : this.acteurs) {
+            i += acteur.getNombrePersonnages();
+        }
+        return i;
+    }
+
+    public ArrayList calculBenefice() {
+
+        double diff = this.recette - this.cout;
+        ArrayList result = new ArrayList();
+
+        if (diff >= 0) {
+
+            result.add(true);
+            result.add(diff);
+
+        } else {
+            result.add(false);
+            result.add(diff);
+        }
+        return result;
+    }
+
     // Fonctions ToString pour afficher les valeurs des attributs
 
     public String toString() {
         return "[Film]" +
-                "Titre du film: " + this.titre + "\n Numéro " + this.nb_episode + "\n Date de Sortie : "
-                + this.annee_sortie + "\n Coût " + this.cout + "\n Recette : " + this.recette;
+                "- Titre du film: " + this.titre + "\n - Numero " + this.nb_episode + "\n - Date de Sortie : "
+                + this.annee_sortie + "\n - Cout " + this.cout + "\n - Recette : " + this.recette + "\n- nb acteurs : "
+                + this.getNombreActeurs() + "\n- nb personnages : " + this.getNombrePersonnages() + "\n- bénéfice : "
+                + this.calculBenefice();
 
     }
+
 }

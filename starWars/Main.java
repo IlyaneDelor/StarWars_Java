@@ -16,27 +16,45 @@ public class Main {
         Prelogie.add(film2);
         Prelogie.add(film3);
 
-        toString(Prelogie);
-
-        Personnage perso1 = new Personnage("Vador", "Dark");
+        Personnage perso1 = new Personnage("Han", "Solo");
         Personnage perso2 = new Personnage("Skywalker", "Luke");
+        Personnage perso3 = new Personnage("Boba", "Fett");
 
         ArrayList<Personnage> Personnages = new ArrayList();
 
         Personnages.add(perso1);
         Personnages.add(perso2);
+        Personnages.add(perso3);
+
+        Acteur acteur1 = new Acteur("Ford", "Harrison");
+        ArrayList<Personnage> personnagesActeur1 = new ArrayList(1);
+        personnagesActeur1.add(perso1);
+        personnagesActeur1.add(perso2);
+        acteur1.setDuetPersonnages(personnagesActeur1);
+
+        ArrayList<Acteur> acteursList1 = new ArrayList();
+        acteursList1.add(acteur1);
+        film1.setActeurs(acteursList1);
+        System.out.println("\n" + film1.toString());
+
+        toString(Prelogie);
 
         int k = 1;
         for (Personnage Personnage : Personnages) {
-            System.out.println("[Personnage " + k + "]" + Personnage.toString());
+            System.out.println("\n [Personnage " + k + "]" + Personnage.toString());
             k++;
         }
 
+        System.out.println("\n L'acteur " + acteur1.nom + " " + acteur1.prenom + " joue "
+                + acteur1.getNombrePersonnages() + " personnages");
+
+        film1.toString();
+
     }
 
-    public static void toString(ArrayList<Film> Prelogie) {
+    public static void toString(ArrayList<Film> Trilogie) {
         int y = 1;
-        for (Film Film : Prelogie) {
+        for (Film Film : Trilogie) {
             System.out.println("[Film " + y + "]" + Film.toString());
             y++;
         }
