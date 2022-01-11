@@ -170,21 +170,21 @@ public class Film {
     }
 
     public ArrayList tri() {
-        ArrayList<Acteur> acteursTries = new ArrayList();
-        if (this.acteurs != null && !this.acteurs.isEmpty() && this.acteurs.size() > 0) {
+        ArrayList<Acteur> Trie = new ArrayList();
+        if (!this.acteurs.isEmpty() && this.acteurs.size() > 0) {
             Collections.sort(this.acteurs, new Comparator<Acteur>() {
 
                 public int compare(Acteur acteur1, Acteur acteur2) {
                     return acteur1.getNom().compareTo(acteur2.getNom());
                 }
             });
-            acteursTries.addAll(this.acteurs);
+            Trie.addAll(this.acteurs);
 
         } else {
-            acteursTries = null;
+            Trie = null;
 
         }
-        return acteursTries;
+        return Trie;
     }
 
     // Fonctions ToString pour afficher les valeurs des attributs

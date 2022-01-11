@@ -44,7 +44,7 @@ public class Acteur {
     }
 
     public String toString() {
-        return "Nom : " + this.nom + "\n Prénom: " + this.prenom;
+        return "Nom : " + this.nom + "\n Prenom: " + this.prenom;
     }
 
 }
