@@ -1,8 +1,11 @@
 package starWars;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 import java.text.ParseException;
+import java.util.HashMap;
 
 public class Main {
     public static void main(String[] arg) throws ParseException {
@@ -44,6 +47,7 @@ public class Main {
         ArrayList<Acteur> acteursList2 = new ArrayList();
         acteursList2.add(acteur2);
         acteursList2.add(acteur3);
+        film2.setActeurs(acteursList2);
 
         ArrayList<Personnage> personnagesActeur2 = new ArrayList(1);
         personnagesActeur2.add(perso4);
@@ -76,6 +80,26 @@ public class Main {
         System.out.println(" \n \n Liste apres l'ordre Chronologique : \n");
         list_actor(acteursList2);
 
+        System.out.println(" \n \n BackUp : \n");
+        HashMap<String, Film> filmDico = new HashMap<String, Film>();
+        filmDico.put(film1.getAnnee_sortie(), film1);
+        filmDico.put(film2.getAnnee_sortie(), film2);
+        filmDico.put(film3.getAnnee_sortie(), film3);
+
+        makeBackUp(filmDico);
+
+    }
+
+    public static void makeBackUp(HashMap filmDico) {
+        Set iterataDico = filmDico.entrySet();
+        Iterator listDico = iterataDico.iterator();
+        while (listDico.hasNext()) {
+            Map.Entry mentry = (Map.Entry) listDico.next();
+            Film test = (Film) mentry.getValue();
+            String titre = test.getTitre();
+            System.out.println(
+                    "\n \n" + mentry.getKey() + " - " + titre + " - " + test.calculBenefice().get(1));
+        }
     }
 
     public static void list_actor(ArrayList<Acteur> List) {

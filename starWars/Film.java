@@ -67,7 +67,7 @@ public class Film {
 
         this.recette = recetteFilm;
 
-        System.out.println(" Nouveau film enregistré dans l'Array ! ");
+        System.out.println(" Nouveau film enregistre dans l'Array ! ");
         Film new_film = new Film(titreFilm, anneeSortiFilm, numeroFilm, coutFilm, recetteFilm);
         return new_film;
 
@@ -170,23 +170,21 @@ public class Film {
     }
 
     public ArrayList tri() {
-        ArrayList<Acteur> Tries = new ArrayList();
-        if (this.acteurs != null && !this.acteurs.isEmpty()) {
-
+        ArrayList<Acteur> acteursTries = new ArrayList();
+        if (this.acteurs != null && !this.acteurs.isEmpty() && this.acteurs.size() > 0) {
             Collections.sort(this.acteurs, new Comparator<Acteur>() {
 
                 public int compare(Acteur acteur1, Acteur acteur2) {
                     return acteur1.getNom().compareTo(acteur2.getNom());
                 }
             });
-
-            Tries.addAll(this.acteurs);
+            acteursTries.addAll(this.acteurs);
 
         } else {
-            Tries = null;
+            acteursTries = null;
 
         }
-        return Tries;
+        return acteursTries;
     }
 
     // Fonctions ToString pour afficher les valeurs des attributs
@@ -194,8 +192,9 @@ public class Film {
     public String toString() {
         return "[Film]" +
                 "- Titre du film: " + this.titre + "\n - Numero " + this.nb_episode + "\n - Date de Sortie : "
-                + this.annee_sortie + "\n - Cout " + this.cout + "\n - Recette : " + this.recette + "\n- nb acteurs : "
-                + this.getNombreActeurs() + "\n- nb personnages : " + this.getNombrePersonnages() + "\n- bénéfice : "
+                + this.annee_sortie + "\n - Cout " + this.cout + "\n - Recette : " + this.recette
+                + "\n- Nombre d'acteurs : "
+                + this.getNombreActeurs() + "\n- nb personnages : " + this.getNombrePersonnages() + "\n- Benefice : "
                 + this.calculBenefice();
 
     }
