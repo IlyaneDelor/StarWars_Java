@@ -2,6 +2,8 @@ package starWars;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -49,9 +51,49 @@ public class DAOAcces {
         }
     }
 
+    public void Lister() {
+        try {
+            String query = "SELECT * FROM Acces";
+            ResultSet users = this.statement.executeQuery(query);
+            while (users.next()) {
+
+                System.out.println("Id : " + users.getInt(1) + " / Prenom : " + users.getString(2)
+                        + " / Login : "
+                        + users.getString(3) + " / Password : " + users.getString(4) + " / Statut : "
+                        + users.getString(5)
+                        + " / Age : " + users.getInt(6) + "\n");
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void Ajout(String prenom, String login, String password, String statut, int age) {
+        try {
+
+            String queryAdd = "INSERT INTO Acces (prenom,login,password,statut,age) VALUES (?,?,?,?,?);";
+
+            PreparedStatement statementP = conn.prepareStatement(queryAdd);
+            statementP.setString(1, prenom);
+            statementP.setString(2, login);
+            statementP.setString(3, password);
+            statementP.setString(4, statut);
+            statementP.setInt(5, age);
+            statementP.execute();
+
+        } catch (
+
+        SQLException e) {
+            System.out.println(e);
+        }
+    }
+
     public static void main(String[] arg) {
         DAOAcces dao = new DAOAcces("bdd", "root", "root", "localhost", "3306");
         System.out.println("Connection Reussie !\n");
+        dao.Ajout("Ilyane", "Delor", "ok", "Admin", 21);
+
+        dao.Lister();
         dao.Close();
 
     }
