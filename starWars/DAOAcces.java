@@ -88,12 +88,35 @@ public class DAOAcces {
         }
     }
 
+    public void Delete(int id) {
+        try {
+
+            String queryDel = "DELETE FROM Acces WHERE id = " + id + ";";
+
+            PreparedStatement statementP = conn.prepareStatement(queryDel);
+            statementP.executeUpdate();
+            System.out.println("Delete reussi !\n \n");
+
+        } catch (
+
+        SQLException e) {
+            System.out.println(e);
+        }
+    }
+
     public static void main(String[] arg) {
         DAOAcces dao = new DAOAcces("bdd", "root", "root", "localhost", "3306");
         System.out.println("Connection Reussie !\n");
-        dao.Ajout("Ilyane", "Delor", "ok", "Admin", 21);
+        System.out.println("Liste Avant : !\n");
 
         dao.Lister();
+
+        dao.Ajout("Ilyane", "Delor", "ok", "Admin", 21);
+        dao.Delete(3);
+
+        System.out.println("Liste Apres : !\n");
+        dao.Lister();
+
         dao.Close();
 
     }
